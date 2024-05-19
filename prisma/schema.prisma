@@ -19,7 +19,6 @@ datasource db {
 // Define the User entity
 model User {
   id        String   @id @default(uuid()) // Change id type to String
-  notifyTaskDeadlineFrequency  String?
   username  String
   name      String   @db.VarChar(100)
   email     String   @unique @db.VarChar(45)

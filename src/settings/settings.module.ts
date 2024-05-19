@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { NotificationService } from './notification.service';
+import { SettingsService } from './settings.service';
+import { SettingsController } from './settings.controller';
 import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
     imports: [PrismaModule],
-    controllers: [],
-    providers: [NotificationService],
+    controllers: [SettingsController],
+    providers: [SettingsService],
 })
 export class SettingsModule {}

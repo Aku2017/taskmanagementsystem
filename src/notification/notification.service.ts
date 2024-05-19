@@ -97,19 +97,19 @@ private calculateDaysLeftForTaskCompletion(endDate: Date): number{
     
     //I am using a scheduler called cron, to send the notfications:
 
-     @Cron(CronExpression.EVERY_DAY_AT_NOON)
+    @Cron(CronExpression.EVERY_DAY_AT_NOON)
   async handleDailyNotifications() {
-    await this.processandSendNotifications(NotificationFrequency.DAILY);
+    await this.processandSendNotifications(NotificationFrequency.DAILY, true);
   }
 
   @Cron(CronExpression.EVERY_12_HOURS)
   async handleBiWeeklyNotifications() {
-    await this.processandSendNotifications(NotificationFrequency.BI_WEEKLY);
+    await this.processandSendNotifications(NotificationFrequency.BI_WEEKLY, true);
   }
 
   @Cron(CronExpression.EVERY_HOUR)
   async handleHourlyNotifications() {
-    await this.processandSendNotifications(NotificationFrequency.HOURLY);
+    await this.processandSendNotifications(NotificationFrequency.HOURLY, true);
   }
     
 }
