@@ -28,9 +28,9 @@ const user = await this.prisma.user.findUnique({
     }
     
     async processandSendNotifications(frequency: NotificationFrequency) {
-    const users = await this.prisma.user.findMany({
-      include: { tasks: true },
-    });
+        const users = await this.prisma.user.findMany({
+            include: { tasks: true },
+        });
 
           for (const user of users) {
           const userFrequency = user.notificationFrequency || NotificationFrequency.SYSTEM_DEFAULT;
