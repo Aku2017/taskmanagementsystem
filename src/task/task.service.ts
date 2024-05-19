@@ -2,7 +2,7 @@
 import {Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Task, Prisma } from '@prisma/client';
-import { TasksGateway } from 'src/websocket/TaskGateway';
+import { TasksGateway } from 'src/websocket/taskgateway';
 //import { CreateTaskDto } from './dto/create-task.dto';
 
 @Injectable()
@@ -116,10 +116,11 @@ async updateTask(params: {
         const updatedTasks = user.tasks.map(task => (task.id === updatedTask.id ? updatedTask : task));
 
         // Update the user with the updated list of tasks
-        await this.prisma.user.update({
+      const task=  await this.prisma.user.update({
           where: { id: updatedTask.user.id },
           data: { tasks: { set: updatedTasks } },
         });
+           this.tasksGateway.notifyTaskUpdated(task);  
     }
         
 
@@ -169,7 +170,7 @@ async updateTask(params: {
                 data: { tasks: { set: updatedTasks } },
             });
         }
-
+        this.tasksGateway.notifyTaskDeleted(params.id);
         return deletedTask;
     } catch (error) {
         // Handle error

@@ -5,21 +5,22 @@ import {
   OnGatewayConnection,
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
-import { Server, WebSocket } from 'ws';
+import { Server } from 'ws';
+import { WebSocket } from 'ws';
 
 @WebSocketGateway()
 export class UserGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()
   server: Server;
 
-  handleConnection(client: WebSocket, ...args: any[]) {
+  handleConnection(client: WebSocket) {
     // Handle new WebSocket connection
-    console.log('New WebSocket client connected for user operations:', client.id);
+    console.log('New WebSocket client connected for user operations:', client['id']);
   }
 
   handleDisconnect(client: WebSocket) {
     // Handle WebSocket disconnection
-    console.log('WebSocket client disconnected:', client.id);
+    console.log('WebSocket client disconnected:', client['id']);
   }
 
   // Method to send a message to all connected WebSocket clients

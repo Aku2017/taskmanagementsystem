@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { UserGateway } from 'src/websocket/UserGateway';
 import { User,  Prisma } from '@prisma/client';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService, private userGateWay: UserGateway) {}
 
     async getAllUser(): Promise<User[]>{
         return this.prisma.user.findMany()
@@ -23,10 +24,13 @@ async createUser(data: Prisma.UserCreateInput): Promise<User> {
     console.log("userservice saves")
             throw new ConflictException('user exists already')
         }
-    
-    return this.prisma.user.create({
+     
+    const createdUser = this.prisma.user.create({
       data,
     });
+  
+  this.userGateWay.handleUserCreated(createdUser);
+  return createdUser;
   }
 
 async updateUser(params: {
@@ -34,10 +38,11 @@ async updateUser(params: {
     data: Prisma.UserUpdateInput;
   }): Promise<User> {
     const { where, data } = params;
-    return this.prisma.user.update({
+    const updatedUser= this.prisma.user.update({
       data,
       where,
     });
+  return updatedUser;
   }
   
 async getUserById(data: Prisma.UserWhereUniqueInput): Promise<User> {
@@ -51,9 +56,11 @@ async getUserById(data: Prisma.UserWhereUniqueInput): Promise<User> {
         return user;
     }
 
-async deleteUser(where: Prisma.UserWhereUniqueInput): Promise<User> {
-    return this.prisma.user.delete({
-      where,
-    });
+async deleteUser(data: Prisma.UserWhereUniqueInput): Promise<User> {
+  this.userGateWay.handleUserDeleted(data.id); 
+  return this.prisma.user.delete({
+      where: { id: data.id},
+  });
+   
   }
 }
