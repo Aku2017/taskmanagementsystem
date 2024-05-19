@@ -2,11 +2,13 @@
 import {Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Task, Prisma } from '@prisma/client';
+import { TasksGateway } from 'src/websocket/TaskGateway';
 //import { CreateTaskDto } from './dto/create-task.dto';
 
 @Injectable()
 export class TaskService {
-    constructor(private readonly prisma: PrismaService) { }
+    constructor(private readonly prisma: PrismaService,
+                private tasksGateway: TasksGateway) { }
 
 async getAllTasks() {
 return this.prisma.task.findMany();
@@ -36,7 +38,8 @@ async createTask(data: Prisma.TaskCreateInput, userId: string): Promise<Task> {
         },
       });
 
-        return task
+    this.tasksGateway.notifyTaskCreated(task); // Notify clients of the new task
+    return task;
     }
         catch (error)
         {
