@@ -27,7 +27,7 @@ const user = await this.prisma.user.findUnique({
     return user.notificationFrequency;
     }
     
-    async processandSendNotifications(frequency: NotificationFrequency) {
+    async processandSendNotifications(frequency: NotificationFrequency, isEmail: boolean) {
         const users = await this.prisma.user.findMany({
             include: { tasks: true },
         });
@@ -37,13 +37,24 @@ const user = await this.prisma.user.findUnique({
         for (const task of user.tasks) {
           const remainingDays = this.calculateDaysLeftForTaskCompletion(task.endDate);
           
-          if (remainingDays !== null)
-        if (userFrequency === frequency || userFrequency === NotificationFrequency.SYSTEM_DEFAULT)   {
-          await this.sendNotificationToUserMail(user, task, remainingDays);
-        }
+            if (remainingDays !== null)
+            {
+                if (userFrequency === frequency || userFrequency === NotificationFrequency.SYSTEM_DEFAULT) 
+                if (isEmail)
+                {
+                    await this.sendNotificationToUserMail(user, task, remainingDays);
+                }
+                await this.sendNotificationToApp(user, task, remainingDays);
+            }
+       
       }
     }
-  }
+    }
+    
+    private async sendNotificationToApp(user: User, task: Task, remainingDays: number) {
+    const text = `Hello ${user.name},\n\nThis is a reminder that your task "${task.title}" is due in ${remainingDays} days.\n\nBest regards,\nTask Management Team`;
+        console.log(`Notification sent to user about task "${task.title}"` + 'with the following information' + text);
+    }
         //here i am implementing a functin that calculates the days left for the task to be completed
  private async sendNotificationToUserMail(user: User, task: Task, remainingDays: number) {
     const subject = `Reminder: Task "${task.title}" is due in ${remainingDays} days`;
