@@ -1,13 +1,20 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Patch, Body, Param, Res } from '@nestjs/common';
+import { Controller,  Body, Param, Res, Put } from '@nestjs/common';
 import { SettingsService } from './settings.service';
 import { UpdateNotificationFrequencyDto } from '../notification/dto/update-notification-frequency.dto'
 import { Response } from 'express';
-@Controller('settings')
+import { ApiTags, ApiBody, ApiResponse, ApiOperation} from '@nestjs/swagger';
+
+@ApiTags('Settings')
+@Controller('Settings')
 export class SettingsController {
   constructor(private readonly settingsService: SettingsService) {}
 
-  @Patch(':id/notification-frequency')
+@ApiOperation({ summary: 'Update notification frequency for a user' })
+@ApiBody({ type: UpdateNotificationFrequencyDto, description: 'Update notification frequency data' })
+@ApiResponse({ status: 200, description: 'Notification frequency updated successfully' })
+@ApiResponse({ status: 400, description: 'Invalid data' })
+@Put(':id')
   async updateNotificationFrequency(
     @Param('id') id: string,
     @Body() updateNotificationFrequencyDto: UpdateNotificationFrequencyDto,
@@ -26,5 +33,6 @@ export class SettingsController {
         message: 'Internal Server Error',
       });
     }
-  }
+}
+    
 }

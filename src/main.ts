@@ -23,6 +23,7 @@ async function bootstrap() {
   .addTag('Users', 'Endpoints related to user management')
     .addTag('Tasks', 'Endpoints related to task management')
     .addTag('Authentication', 'Endpoints related to auth management')
+    .addTag('Settings', 'Endpoints related to settings management')
   .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);

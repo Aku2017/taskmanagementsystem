@@ -55,7 +55,7 @@ const user = await this.prisma.user.findUnique({
     const text = `Hello ${user.name},\n\nThis is a reminder that your task "${task.title}" is due in ${remainingDays} days.\n\nBest regards,\nTask Management Team`;
         console.log(`Notification sent to user about task "${task.title}"` + 'with the following information' + text);
     }
-        //here i am implementing a functin that calculates the days left for the task to be completed
+        //here i am implementing a function that calculates the days left for the task to be completed
  private async sendNotificationToUserMail(user: User, task: Task, remainingDays: number) {
     const subject = `Reminder: Task "${task.title}" is due in ${remainingDays} days`;
     const text = `Hello ${user.name},\n\nThis is a reminder that your task "${task.title}" is due in ${remainingDays} days.\n\nBest regards,\nTask Management Team`;
