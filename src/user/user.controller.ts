@@ -5,7 +5,7 @@ import { Controller, Get, Post, Put, Delete, Body, Param, Req, Res } from '@nest
 import { Request, Response } from 'express';
 import { ApiTags, ApiResponse, ApiOperation, ApiParam, ApiBody } from '@nestjs/swagger';
 import { UserService } from './user.service';
-import { Prisma } from '@prisma/client';
+import { Prisma, NotificationFrequency } from '@prisma/client';
 import { RegisterUserDto } from 'src/authentication/dto/register-user.dto';
 
 
@@ -147,7 +147,20 @@ async getUserById(@Param('id') id: string, @Res() response: Response): Promise<a
       });
     }
   }
+
+  @Put(':id/notification-frequency')
+  async updateNotificationFrequency(
+    @Param('id') id: string,
+    @Body() { frequency }: { frequency: NotificationFrequency },
+  ) {
+    return this.userService.updateUser({
+      where: { id: String(id) },
+      data: { notificationFrequency: frequency }
+    });
+  }
 }
+
+
 
 
 
