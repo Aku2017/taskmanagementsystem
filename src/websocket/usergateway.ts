@@ -8,6 +8,7 @@ import {
 import { Server } from 'ws';
 import { WebSocket } from 'ws';
 
+
 @WebSocketGateway()
 export class UserGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()
@@ -25,12 +26,22 @@ export class UserGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   // Method to send a message to all connected WebSocket clients
   broadcastMessage(message: any) {
-    this.server.clients.forEach(client => {
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(JSON.stringify(message));
-      }
-    });
+  // Check if this.server is defined
+  if (this.server) {
+    // Check if this.server.clients is defined
+    if (this.server.clients) {
+      this.server.clients.forEach(client => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(JSON.stringify(message));
+        }
+      });
+    } else {
+      console.log('No WebSocket clients connected');
+    }
+  } else {
+    console.log('WebSocket server is not initialized');
   }
+}
 
   // Example method to handle user CRUD events and broadcast updates
   handleUserCreated(user: any) {

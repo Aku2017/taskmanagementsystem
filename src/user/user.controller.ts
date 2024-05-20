@@ -93,6 +93,7 @@ async getUserById(@Param('id') id: string, @Res() response: Response): Promise<a
         result: user,
       });
     } catch (err) {
+      console.log(err)
       return response.status(500).json({
         status: err,
         message: 'Internal Server Error',
@@ -142,7 +143,7 @@ async getUserById(@Param('id') id: string, @Res() response: Response): Promise<a
       });
     } catch (err) {
       return response.status(500).json({
-        status: 'error',
+        status: err,
         message: 'Internal Server Error',
       });
     }

@@ -6,7 +6,7 @@ import { User,  Prisma } from '@prisma/client';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService, private userGateWay: UserGateway) {}
+  constructor(private prisma: PrismaService, private readonly userGateWay: UserGateway) {}
 
     async getAllUser(): Promise<User[]>{
         return this.prisma.user.findMany()
@@ -42,6 +42,7 @@ async updateUser(params: {
       data,
       where,
     });
+  this.userGateWay.handleUserUpdated(updatedUser); 
   return updatedUser;
   }
   
@@ -52,7 +53,7 @@ async getUserById(data: Prisma.UserWhereUniqueInput): Promise<User> {
         });
         if (!user) {
             throw new NotFoundException('User not found');
-        }
+  } 
         return user;
     }
 

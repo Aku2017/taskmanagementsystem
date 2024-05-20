@@ -2,7 +2,7 @@
 import {Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Task, Prisma } from '@prisma/client';
-import { TasksGateway } from 'src/websocket/taskgateway';
+import { TasksGateway } from 'src/websocket/taskgateway'
 //import { CreateTaskDto } from './dto/create-task.dto';
 
 @Injectable()

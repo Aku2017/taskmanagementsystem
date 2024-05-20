@@ -8,6 +8,8 @@ import { UserService } from 'src/user/user.service';
 import { UserModule } from 'src/user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { UserGateway } from 'src/websocket/UserGateway';
+
 
 @Module({
     imports: [
@@ -22,7 +24,7 @@ import { JwtModule } from '@nestjs/jwt';
         })
     ],
     controllers: [AuthController],
-    providers: [AuthService, PrismaService, JwtStrategy, UserService],
+    providers: [AuthService, PrismaService, JwtStrategy, UserService, UserGateway],
     
 })
 export class AuthModule {
