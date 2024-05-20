@@ -1,73 +1,135 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# taskmanagementsystem
+# Task Management Application
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is a Task Management application built using NestJS and Prisma ORM. It provides APIs to manage tasks and users.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+- Create, read, update, and delete tasks
+- Create, read, update, and delete users
+- Real-time updates using WebSockets
 
-[Nest](https://github.com/aku2017/taskmanagementsystem) framework TypeScript starter repository.
+## Technologies Used
 
-## Installation
+- NestJS
+- Prisma ORM
+- PostgreSQL
+- Docker
 
-```bash
-$ npm install
-```
+## Getting Started
 
-## Running the app
+### Prerequisites
 
-```bash
-# development
-$ npm run start
+- Node.js (v16 or higher)
+- Docker
+- Docker Compose
 
-# watch mode
-$ nest start:dev
+### Installation
 
-# production mode
-$ nest start:prod
-```
+1. Clone the repository:
 
-## Test
+   git clone <repository-url>
+  
+2. Navigate to Project Directory
+cd taskmanagement
 
-```bash
-# unit tests
-$ npm run test
+3. Install dependencies
+npm install
 
-# e2e tests
-$ npm run test:e2e
+**Database Setup**
+a. Start the PostgreSQL database using Docker Compose:
 
-# test coverage
-$ npm run test:cov
-```
+docker-compose up -d
 
-## Support
+b. Run Prisma migrations to create tables in the database:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+npm run prisma:migrate
 
-## Stay in touch
+c. Running the Application
+Start the NestJS application:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+npm run start:dev
+Access the API at http://localhost:3000/api
 
-## License
 
-Nest is [MIT licensed](LICENSE).
+Sure, here's a README.md file for your Task Management application:
+
+markdown
+Copy code
+# Task Management Application
+
+This is a Task Management application built using NestJS and Prisma ORM. It provides APIs to manage tasks and users.
+
+## Features
+
+- Create, read, update, and delete tasks
+- Create, read, update, and delete users
+- Real-time updates using WebSockets
+
+## Technologies Used
+
+- NestJS
+- Prisma ORM
+- PostgreSQL
+- Docker
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- Docker
+- Docker Compose
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+Navigate to the project directory:
+
+bash
+Copy code
+cd taskmanagement
+Install dependencies:
+
+bash
+Copy code
+npm install
+Database Setup
+Start the PostgreSQL database using Docker Compose:
+
+bash
+Copy code
+docker-compose up -d
+Run Prisma migrations to create tables in the database:
+
+bash
+Copy code
+npm run prisma:migrate
+Running the Application
+Start the NestJS application:
+
+bash
+Copy code
+npm run start:dev
+Access the API at http://localhost:3000/api
+
+**Docker Configuration**
+To run the application using Docker, follow these steps:
+
+1. Build the Docker image:
+
+docker-compose build
+
+
+2. Start the Docker containers:
+
+docker-compose up
+
+The application is running at localhost:3000
+
+To create users: run localhost:3000/Users and use postman to test
+
+To create a task: run http://localhost:3000/Tasks/UserId i.e http://localhost:3000/Tasks/0f69dcff-019b-4e03-a5c7-cde3e07a8859
