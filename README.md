@@ -83,36 +83,29 @@ This is a Task Management application built using NestJS and Prisma ORM. It prov
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository:**
 
-   ```bash
    git clone https://github.com/Aku2017/taskmanagementsystem
-Navigate to the project directory:
+   
+2.**Navigate to the project directory:**
 
-bash
-Copy code
 cd taskmanagement
-Install dependencies:
 
-bash
-Copy code
+3. Install dependencies:
 npm install
-Database Setup
+
+4.**Database Setup**
 Start the PostgreSQL database using Docker Compose:
 
-bash
-Copy code
 docker-compose up -d
-Run Prisma migrations to create tables in the database:
 
-bash
-Copy code
+5. **Run Prisma migrations to create tables in the database**:
+
 npm run prisma:migrate
-Running the Application
+
+6. **Running the Application**
 Start the NestJS application:
 
-bash
-Copy code
 npm run start:dev
 Access the API at http://localhost:3000/api
 
