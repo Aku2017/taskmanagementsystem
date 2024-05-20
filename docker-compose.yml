@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: test
+    ports:
+      - '5434:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: 'postgresql://postgres:admin@db:5432/test?schema=public'
+      JWT_SECRET: 'secretKey'
+      JWT_EXPIRES_IN: '300'
+    depends_on:
+      - db
+    command: sh -c "npx prisma migrate deploy --preview-feature && npm run start:prod"
+
+volumes:
+  postgres_data:

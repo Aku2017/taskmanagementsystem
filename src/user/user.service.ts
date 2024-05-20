@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { UserGateway } from 'src/websocket/UserGateway';
+import { UserGateway } from '../websocket/UserGateway';
 import { User,  Prisma } from '@prisma/client';
+//import { UserGateway } from './usergateway';
 
 @Injectable()
 export class UserService {
