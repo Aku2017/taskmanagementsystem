@@ -28,7 +28,7 @@ This is a Task Management application built using NestJS and Prisma ORM. It prov
 
 1. Clone the repository:
 
-   git clone <repository-url>
+   git clone (https://github.com/Aku2017/taskmanagementsystem)
   
 2. Navigate to Project Directory
 cd taskmanagement
@@ -86,7 +86,7 @@ This is a Task Management application built using NestJS and Prisma ORM. It prov
 1. Clone the repository:
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Aku2017/taskmanagementsystem
 Navigate to the project directory:
 
 bash
